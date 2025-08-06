@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryApp.DataAccess\LibraryApp.DataAccess.csproj" />
+    <ProjectReference Include="..\LibraryApp.Entity\LibraryApp.Entity.csproj" />
+    <ProjectReference Include="..\LibraryApp.Interfaces\LibraryApp.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
