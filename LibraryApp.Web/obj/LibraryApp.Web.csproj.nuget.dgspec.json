@@ -165,7 +165,11 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Eray\\Desktop\\Workshop\\LibraryApp\\LibraryApp.Entity\\LibraryApp.Entity.csproj": {
+                "projectPath": "C:\\Users\\Eray\\Desktop\\Workshop\\LibraryApp\\LibraryApp.Entity\\LibraryApp.Entity.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

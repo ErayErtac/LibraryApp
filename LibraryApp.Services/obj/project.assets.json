@@ -28,6 +28,9 @@
       "LibraryApp.Interfaces/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "LibraryApp.Entity": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/LibraryApp.Interfaces.dll": {}
         },

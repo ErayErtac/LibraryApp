@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {}
+    "net9.0": {
+      "LibraryApp.Entity/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/LibraryApp.Entity.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LibraryApp.Entity.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "LibraryApp.Entity/1.0.0": {
+      "type": "project",
+      "path": "../LibraryApp.Entity/LibraryApp.Entity.csproj",
+      "msbuildProject": "../LibraryApp.Entity/LibraryApp.Entity.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net9.0": []
+    "net9.0": [
+      "LibraryApp.Entity >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Eray\\.nuget\\packages\\": {},
@@ -38,7 +57,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Eray\\Desktop\\Workshop\\LibraryApp\\LibraryApp.Entity\\LibraryApp.Entity.csproj": {
+              "projectPath": "C:\\Users\\Eray\\Desktop\\Workshop\\LibraryApp\\LibraryApp.Entity\\LibraryApp.Entity.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
