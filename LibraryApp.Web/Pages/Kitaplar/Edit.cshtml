@@ -1,0 +1,37 @@
+﻿@page "{id:int}"
+@model LibraryApp.Web.Pages.Kitaplar.EditModel
+
+@{
+    ViewData["Title"] = "Kitap Düzenle";
+}
+
+<h2>Kitap Düzenle</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Kitap.Id" />
+
+    <div class="form-group">
+        <label asp-for="Kitap.Ad"></label>
+        <input asp-for="Kitap.Ad" class="form-control" />
+        <span asp-validation-for="Kitap.Ad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Kitap.Yazar"></label>
+        <input asp-for="Kitap.Yazar" class="form-control" />
+        <span asp-validation-for="Kitap.Yazar" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Kitap.YayimYili"></label>
+        <input asp-for="Kitap.YayimYili" class="form-control" />
+        <span asp-validation-for="Kitap.YayimYili" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a asp-page="Index" class="btn btn-secondary">İptal</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

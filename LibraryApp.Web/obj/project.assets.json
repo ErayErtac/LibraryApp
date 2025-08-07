@@ -2816,6 +2816,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "LibraryApp.DataAccess >= 1.0.0",
       "LibraryApp.Entity >= 1.0.0",
       "LibraryApp.Interfaces >= 1.0.0",
       "LibraryApp.Services >= 1.0.0"
@@ -2853,6 +2854,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
+            "C:\\Users\\Eray\\Desktop\\Workshop\\LibraryApp\\LibraryApp.DataAccess\\LibraryApp.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Eray\\Desktop\\Workshop\\LibraryApp\\LibraryApp.DataAccess\\LibraryApp.DataAccess.csproj"
+            },
             "C:\\Users\\Eray\\Desktop\\Workshop\\LibraryApp\\LibraryApp.Entity\\LibraryApp.Entity.csproj": {
               "projectPath": "C:\\Users\\Eray\\Desktop\\Workshop\\LibraryApp\\LibraryApp.Entity\\LibraryApp.Entity.csproj"
             },

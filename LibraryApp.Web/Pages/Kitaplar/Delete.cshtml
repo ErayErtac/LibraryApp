@@ -1,0 +1,21 @@
+﻿@page "{id:int}"
+@model LibraryApp.Web.Pages.Kitaplar.DeleteModel
+
+@{
+    ViewData["Title"] = "Kitap Sil";
+}
+
+<h2>Kitap Sil</h2>
+
+<h3>Bu kitabı silmek istediğinize emin misiniz?</h3>
+
+<div>
+    <h4>@Model.Kitap.Ad</h4>
+    <p><strong>Yazar:</strong> @Model.Kitap.Yazar</p>
+    <p><strong>Yayın Yılı:</strong> @Model.Kitap.YayimYili</p>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-page="Index" class="btn btn-secondary">İptal</a>
+</form>

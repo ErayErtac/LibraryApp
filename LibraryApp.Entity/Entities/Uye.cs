@@ -10,11 +10,11 @@ namespace LibraryApp.Entity.Entities
     {
         public int Id { get; set; }
 
-        public string AdSoyad { get; set; } = null!;
+        public string AdSoyad { get; set; } = string.Empty;
 
-        public string Eposta { get; set; } = null!;
+        public string Eposta { get; set; } = string.Empty;
 
-        public string Telefon { get; set; } = null!;
+        public string Telefon { get; set; } = string.Empty;
 
         public DateTime KayitTarihi { get; set; }
 

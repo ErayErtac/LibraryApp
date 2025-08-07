@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LibraryApp.DataAccess\LibraryApp.DataAccess.csproj" />
     <ProjectReference Include="..\LibraryApp.Entity\LibraryApp.Entity.csproj" />
     <ProjectReference Include="..\LibraryApp.Interfaces\LibraryApp.Interfaces.csproj" />
     <ProjectReference Include="..\LibraryApp.Services\LibraryApp.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Oduncler\" />
   </ItemGroup>
 
 </Project>
