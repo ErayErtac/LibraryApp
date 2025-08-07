@@ -3,36 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using LibraryApp.Entity.Entities;
 using LibraryApp.Interfaces.Services;
+using LibraryApp.DataAccess.Repositories;
 
-namespace LibraryApp.Services.Services
+namespace LibraryApp.Service.Services
 {
     public class KitapService : IKitapService
     {
-        public Task<List<Kitap>> GetAllAsync()
+        private readonly IKitapRepository _kitapRepository;
+
+        public KitapService(IKitapRepository kitapRepository)
         {
-            throw new NotImplementedException();
+            _kitapRepository = kitapRepository;
         }
 
-        public Task<Kitap?> GetByIdAsync(int id)
+        public async Task<List<Kitap>> TumKitaplariGetirAsync()
         {
-            throw new NotImplementedException();
+            return await _kitapRepository.GetAllAsync();
         }
 
-        public Task AddAsync(Kitap kitap)
+        public async Task<Kitap?> IdIleGetirAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _kitapRepository.GetByIdAsync(id);
         }
 
-        public Task UpdateAsync(Kitap kitap)
+        public async Task EkleAsync(Kitap kitap)
         {
-            throw new NotImplementedException();
+            await _kitapRepository.AddAsync(kitap);
         }
 
-        public Task DeleteAsync(int id)
+        public async Task GuncelleAsync(Kitap kitap)
         {
-            throw new NotImplementedException();
+            await _kitapRepository.UpdateAsync(kitap);
+        }
+
+        public async Task SilAsync(int id)
+        {
+            await _kitapRepository.DeleteAsync(id);
         }
     }
 }

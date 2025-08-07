@@ -10,14 +10,10 @@ namespace LibraryApp.Interfaces.Services
     // Interface - Üye servisi için sözleşme
     public interface IUyeService
     {
-        Task<List<Uye>> GetAllAsync();
-
-        Task<Uye?> GetByIdAsync(int id);
-
-        Task AddAsync(Uye uye);
-
-        Task UpdateAsync(Uye uye);
-
-        Task DeleteAsync(int id);
+        Task<List<Uye>> TumUyeleriGetirAsync();
+        Task<Uye?> IdIleGetirAsync(int id);
+        Task EkleAsync(Uye uye);
+        Task GuncelleAsync(Uye uye);
+        Task SilAsync(int id);
     }
 }

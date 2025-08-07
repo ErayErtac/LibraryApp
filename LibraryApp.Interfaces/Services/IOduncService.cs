@@ -10,14 +10,10 @@ namespace LibraryApp.Interfaces.Services
     // Interface - Ödünç servisi için sözleşme
     public interface IOduncService
     {
-        Task<List<Odunc>> GetAllAsync();
-
-        Task<Odunc?> GetByIdAsync(int id);
-
-        Task AddAsync(Odunc odunc);
-
-        Task UpdateAsync(Odunc odunc);
-
-        Task DeleteAsync(int id);
+        Task<List<Odunc>> TumOduncleriGetirAsync();
+        Task<Odunc?> IdIleGetirAsync(int id);
+        Task EkleAsync(Odunc odunc);
+        Task GuncelleAsync(Odunc odunc);
+        Task SilAsync(int id);
     }
 }

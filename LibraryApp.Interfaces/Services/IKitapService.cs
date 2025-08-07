@@ -10,14 +10,11 @@ namespace LibraryApp.Interfaces.Services
     // Interface - Kitap servisi için sözleşme
     public interface IKitapService
     {
-        Task<List<Kitap>> GetAllAsync();
-
-        Task<Kitap?> GetByIdAsync(int id);
-
-        Task AddAsync(Kitap kitap);
-
-        Task UpdateAsync(Kitap kitap);
-
-        Task DeleteAsync(int id);
+        Task<List<Kitap>> TumKitaplariGetirAsync();
+        Task<Kitap?> IdIleGetirAsync(int id);
+        Task EkleAsync(Kitap kitap);
+        Task GuncelleAsync(Kitap kitap);
+        Task SilAsync(int id);
     }
+
 }

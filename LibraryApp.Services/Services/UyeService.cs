@@ -3,37 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using LibraryApp.Entity.Entities;
 using LibraryApp.Interfaces.Services;
+using LibraryApp.DataAccess.Repositories;
 
-namespace LibraryApp.Services.Services
+namespace LibraryApp.Service.Services
 {
     public class UyeService : IUyeService
     {
-        public Task<List<Uye>> GetAllAsync()
+        private readonly IUyeRepository _uyeRepository;
+
+        public UyeService(IUyeRepository uyeRepository)
         {
-            throw new NotImplementedException();
+            _uyeRepository = uyeRepository;
         }
 
-        public Task<Uye?> GetByIdAsync(int id)
+        public async Task<List<Uye>> TumUyeleriGetirAsync()
         {
-            throw new NotImplementedException();
+            return await _uyeRepository.GetAllAsync();
         }
 
-        public Task AddAsync(Uye uye)
+        public async Task<Uye?> IdIleGetirAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _uyeRepository.GetByIdAsync(id);
         }
 
-        public Task UpdateAsync(Uye uye)
+        public async Task EkleAsync(Uye uye)
         {
-            throw new NotImplementedException();
+            await _uyeRepository.AddAsync(uye);
         }
 
-        public Task DeleteAsync(int id)
+        public async Task GuncelleAsync(Uye uye)
         {
-            throw new NotImplementedException();
+            await _uyeRepository.UpdateAsync(uye);
+        }
+
+        public async Task SilAsync(int id)
+        {
+            await _uyeRepository.DeleteAsync(id);
         }
     }
 }
-

@@ -3,37 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using LibraryApp.Entity.Entities;
 using LibraryApp.Interfaces.Services;
+using LibraryApp.DataAccess.Repositories;
 
-
-namespace LibraryApp.Services.Services
+namespace LibraryApp.Service.Services
 {
     public class OduncService : IOduncService
     {
-        public Task<List<Odunc>> GetAllAsync()
+        private readonly IOduncRepository _oduncRepository;
+
+        public OduncService(IOduncRepository oduncRepository)
         {
-            throw new NotImplementedException();
+            _oduncRepository = oduncRepository;
         }
 
-        public Task<Odunc?> GetByIdAsync(int id)
+        public async Task<List<Odunc>> TumOduncleriGetirAsync()
         {
-            throw new NotImplementedException();
+            return await _oduncRepository.GetAllAsync();
         }
 
-        public Task AddAsync(Odunc odunc)
+        public async Task<Odunc?> IdIleGetirAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _oduncRepository.GetByIdAsync(id);
         }
 
-        public Task UpdateAsync(Odunc odunc)
+        public async Task EkleAsync(Odunc odunc)
         {
-            throw new NotImplementedException();
+            await _oduncRepository.AddAsync(odunc);
         }
 
-        public Task DeleteAsync(int id)
+        public async Task GuncelleAsync(Odunc odunc)
         {
-            throw new NotImplementedException();
+            await _oduncRepository.UpdateAsync(odunc);
+        }
+
+        public async Task SilAsync(int id)
+        {
+            await _oduncRepository.DeleteAsync(id);
         }
     }
 }
