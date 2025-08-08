@@ -9,10 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<KutuphaneDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("KutuphaneConn")));
 
+// Generic Repository kayýtlarý
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+// Specific Repository kayýtlarý
 builder.Services.AddScoped<IKitapRepository, KitapRepository>();
 builder.Services.AddScoped<IUyeRepository, UyeRepository>();
 builder.Services.AddScoped<IOduncRepository, OduncRepository>();
 
+// Service kayýtlarý
 builder.Services.AddScoped<IKitapService, KitapService>();
 builder.Services.AddScoped<IUyeService, UyeService>();
 builder.Services.AddScoped<IOduncService, OduncService>();
@@ -26,22 +31,15 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
-
-app.MapRazorPages();
 
 app.Run();

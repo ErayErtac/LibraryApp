@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using LibraryApp.Entity.Entities;
 
 namespace LibraryApp.Interfaces.Services
 {
-    // Interface - Ödünç servisi için sözleşme
     public interface IOduncService
     {
         Task<List<Odunc>> TumOduncleriGetirAsync();
@@ -15,5 +12,8 @@ namespace LibraryApp.Interfaces.Services
         Task EkleAsync(Odunc odunc);
         Task GuncelleAsync(Odunc odunc);
         Task SilAsync(int id);
+        Task<List<Odunc>> AktifOduncleriGetirAsync();
+        Task<List<Odunc>> TeslimEdilmisOduncleriGetirAsync();
+        Task KitapIadeEtAsync(int oduncId);
     }
 }

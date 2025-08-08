@@ -1,0 +1,43 @@
+﻿@page "{id:int}"
+@model LibraryApp.Web.Pages.Uyeler.EditModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Üye Düzenle";
+}
+
+<h2>Üye Düzenle</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Uye.Id" />
+
+    <div class="form-group">
+        <label asp-for="Uye.AdSoyad"></label>
+        <input asp-for="Uye.AdSoyad" class="form-control" />
+        <span asp-validation-for="Uye.AdSoyad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Uye.Eposta"></label>
+        <input asp-for="Uye.Eposta" class="form-control" />
+        <span asp-validation-for="Uye.Eposta" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Uye.Telefon"></label>
+        <input asp-for="Uye.Telefon" class="form-control" />
+        <span asp-validation-for="Uye.Telefon" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Uye.KayitTarihi"></label>
+        <input asp-for="Uye.KayitTarihi" type="date" class="form-control" />
+        <span asp-validation-for="Uye.KayitTarihi" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+    <a asp-page="Index" class="btn btn-secondary">İptal</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

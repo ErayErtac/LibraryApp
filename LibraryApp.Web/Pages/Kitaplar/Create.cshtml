@@ -1,33 +1,53 @@
 ﻿@page
 @model LibraryApp.Web.Pages.Kitaplar.CreateModel
-
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Yeni Kitap Ekle";
 }
 
 <h2>Yeni Kitap Ekle</h2>
 
 <form method="post">
-    <div class="form-group">
-        <label asp-for="Kitap.Ad"></label>
-        <input asp-for="Kitap.Ad" class="form-control" />
-        <span asp-validation-for="Kitap.Ad" class="text-danger"></span>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label asp-for="Kitap.Ad" class="form-label"></label>
+                <input asp-for="Kitap.Ad" class="form-control" />
+                <span asp-validation-for="Kitap.Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Kitap.Yazar" class="form-label"></label>
+                <input asp-for="Kitap.Yazar" class="form-control" />
+                <span asp-validation-for="Kitap.Yazar" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Kitap.YayimYili" class="form-label"></label>
+                <input asp-for="Kitap.YayimYili" type="number" class="form-control" min="1000" max="2100" />
+                <span asp-validation-for="Kitap.YayimYili" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label asp-for="Kitap.Kategori" class="form-label"></label>
+                <input asp-for="Kitap.Kategori" class="form-control" />
+                <span asp-validation-for="Kitap.Kategori" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Kitap.StokAdedi" class="form-label"></label>
+                <input asp-for="Kitap.StokAdedi" type="number" class="form-control" min="0" />
+                <span asp-validation-for="Kitap.StokAdedi" class="text-danger"></span>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Kitap.Yazar"></label>
-        <input asp-for="Kitap.Yazar" class="form-control" />
-        <span asp-validation-for="Kitap.Yazar" class="text-danger"></span>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Ekle
+        </button>
+        <a asp-page="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> İptal
+        </a>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Kitap.YayimYili"></label>
-        <input asp-for="Kitap.YayimYili" class="form-control" />
-        <span asp-validation-for="Kitap.YayimYili" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Ekle</button>
-    <a asp-page="Index" class="btn btn-secondary">İptal</a>
 </form>
 
 @section Scripts {

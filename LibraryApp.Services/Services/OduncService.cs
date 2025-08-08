@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using LibraryApp.Entity.Entities;
 using LibraryApp.Interfaces.Services;
 using LibraryApp.DataAccess.Repositories;
@@ -21,16 +18,23 @@ namespace LibraryApp.Service.Services
 
         public async Task<List<Odunc>> TumOduncleriGetirAsync()
         {
-            return await _oduncRepository.GetAllAsync();
+            return await _oduncRepository.GetAllWithDetailsAsync();
         }
 
         public async Task<Odunc?> IdIleGetirAsync(int id)
         {
-            return await _oduncRepository.GetByIdAsync(id);
+            return await _oduncRepository.GetByIdWithDetailsAsync(id);
         }
 
         public async Task EkleAsync(Odunc odunc)
         {
+            // Yeni ödünç kaydı oluştururken varsayılan değerler
+            odunc.Aktif = true;
+            if (odunc.OduncTarihi == default(DateTime))
+            {
+                odunc.OduncTarihi = DateTime.Today;
+            }
+
             await _oduncRepository.AddAsync(odunc);
         }
 
@@ -42,6 +46,27 @@ namespace LibraryApp.Service.Services
         public async Task SilAsync(int id)
         {
             await _oduncRepository.DeleteAsync(id);
+        }
+
+        public async Task<List<Odunc>> AktifOduncleriGetirAsync()
+        {
+            return await _oduncRepository.GetAktifOdunclerAsync();
+        }
+
+        public async Task<List<Odunc>> TeslimEdilmisOduncleriGetirAsync()
+        {
+            return await _oduncRepository.GetTeslimEdilmisOdunclerAsync();
+        }
+
+        public async Task KitapIadeEtAsync(int oduncId)
+        {
+            var odunc = await _oduncRepository.GetByIdAsync(oduncId);
+            if (odunc != null && odunc.Aktif)
+            {
+                odunc.IadeTarihi = DateTime.Today;
+                odunc.Aktif = false;
+                await _oduncRepository.UpdateAsync(odunc);
+            }
         }
     }
 }

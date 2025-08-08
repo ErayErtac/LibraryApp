@@ -1,31 +1,84 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+:root {
+    --primary: #1C352D;
+    --secondary: #A6B28B;
+    --accent: #F5C9B0;
+    --bg: #F9F6F3;
+    --text: #1C352D;
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.navbar {
+    background-color: var(--primary);
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+    .navbar .nav-link,
+    .navbar-brand {
+        color: var(--bg);
+        padding: 8px 15px;
+        margin: 0 5px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+        .navbar .nav-link:hover {
+            background-color: var(--secondary);
+            color: var(--primary) !important;
+            border-color: var(--accent);
+        }
+
+        .navbar .nav-link.active,
+        .navbar .nav-link[aria-current="page"] {
+            background-color: var(--accent);
+            color: var(--primary) !important;
+            border-color: var(--secondary);
+        }
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
+
+    .btn-primary:hover {
+        background-color: var(--secondary);
+        border-color: var(--secondary);
+    }
+
+.btn-secondary {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+    .btn-secondary:hover {
+        background-color: var(--accent);
+        border-color: var(--accent);
+    }
+
+.table {
+    background-color: var(--bg);
+}
+
+    .table thead {
+        background-color: var(--secondary);
+        color: var(--primary);
+    }
+
+    .table tbody tr:hover {
+        background-color: var(--accent);
+        color: var(--primary);
+    }
+
+.form-control {
+    border: 1px solid var(--secondary);
+    background-color: var(--bg);
+}
+
+    .form-control:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.2rem rgba(245, 201, 176, 0.5);
+    }

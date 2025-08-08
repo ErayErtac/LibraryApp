@@ -1,17 +1,23 @@
 ﻿@page
 @model LibraryApp.Web.Pages.Kitaplar.IndexModel
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Kitaplar";
 }
 
 <h2>Kitaplar</h2>
 
-<table class="table">
-    <thead>
+<!-- Yeni Kitap Ekle Butonu -->
+<a class="btn btn-primary mb-3" asp-page="Create">Yeni Kitap Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
             <th>Ad</th>
             <th>Yazar</th>
             <th>Yayın Yılı</th>
+            <th>Kategori</th>
+            <th>Stok Adedi</th>
             <th>İşlemler</th>
         </tr>
     </thead>
@@ -22,10 +28,25 @@
                 <td>@kitap.Ad</td>
                 <td>@kitap.Yazar</td>
                 <td>@kitap.YayimYili</td>
+                <td>@kitap.Kategori</td>
                 <td>
-                    <!-- Düzenleme ve Silme linkleri buraya -->
+                    <span class="badge @(kitap.StokAdedi > 0 ? "bg-success" : "bg-danger")">
+                        @kitap.StokAdedi
+                    </span>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-page="Edit" asp-route-id="@kitap.Id">Düzenle</a>
+                    <a class="btn btn-sm btn-danger" asp-page="Delete" asp-route-id="@kitap.Id">Sil</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@if (!Model.Kitaplar.Any())
+{
+    <div class="alert alert-info text-center">
+        <h4>Henüz kitap bulunmuyor</h4>
+        <p>İlk kitabınızı eklemek için yukarıdaki "Yeni Kitap Ekle" butonunu kullanın.</p>
+    </div>
+}

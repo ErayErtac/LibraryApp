@@ -1,0 +1,43 @@
+﻿@page "{id:int}"
+@model LibraryApp.Web.Pages.Oduncler.EditModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Ödünç İşlemi Düzenle";
+}
+
+<h2>Ödünç İşlemi Düzenle</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Odunc.Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Odunc.UyeId"></label>
+        <select asp-for="Odunc.UyeId" class="form-control" asp-items="Model.UyeListesi"></select>
+        <span asp-validation-for="Odunc.UyeId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Odunc.KitapId"></label>
+        <select asp-for="Odunc.KitapId" class="form-control" asp-items="Model.KitapListesi"></select>
+        <span asp-validation-for="Odunc.KitapId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Odunc.OduncTarihi"></label>
+        <input asp-for="Odunc.OduncTarihi" type="date" class="form-control" />
+        <span asp-validation-for="Odunc.OduncTarihi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Odunc.IadeTarihi"></label>
+        <input asp-for="Odunc.IadeTarihi" type="date" class="form-control" />
+        <span asp-validation-for="Odunc.IadeTarihi" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+    <a asp-page="Index" class="btn btn-secondary">İptal</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

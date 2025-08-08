@@ -1,32 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 using LibraryApp.Entity.Entities;
 using LibraryApp.Interfaces.Services;
 using System.Threading.Tasks;
 
-namespace LibraryApp.Web.Pages.Kitaplar
+namespace LibraryApp.Web.Pages.Uyeler
 {
     public class EditModel : PageModel
     {
-        private readonly IKitapService _kitapService;
+        private readonly IUyeService _uyeService;
 
-        public EditModel(IKitapService kitapService)
+        public EditModel(IUyeService uyeService)
         {
-            _kitapService = kitapService;
+            _uyeService = uyeService;
         }
 
         [BindProperty]
-        public Kitap Kitap { get; set; } = new();
+        public Uye Uye { get; set; } = new();
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Kitap = await _kitapService.IdIleGetirAsync(id);
+            Uye = await _uyeService.IdIleGetirAsync(id);
 
-            if (Kitap == null)
-            {
+            if (Uye == null)
                 return RedirectToPage("Index");
-            }
 
             return Page();
         }
@@ -34,12 +31,9 @@ namespace LibraryApp.Web.Pages.Kitaplar
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
-            await _kitapService.GuncelleAsync(Kitap);
-
+            await _uyeService.GuncelleAsync(Uye);
             return RedirectToPage("Index");
         }
     }

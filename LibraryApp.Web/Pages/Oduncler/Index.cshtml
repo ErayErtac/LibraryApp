@@ -1,0 +1,162 @@
+﻿@page
+@model LibraryApp.Web.Pages.Oduncler.IndexModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Ödünç İşlemleri";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Mesaj gösterimi -->
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-@TempData["MessageType"] alert-dismissible fade show" role="alert">
+                    @TempData["Message"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Ödünç İşlemleri</h2>
+                <a asp-page="Create" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i> Yeni Ödünç İşlemi
+                </a>
+            </div>
+
+            <!-- Filtre Butonları -->
+            <div class="mb-3">
+                <div class="btn-group" role="group">
+                    <a asp-page="Index" asp-route-filter="all"
+                       class="btn @(Model.CurrentFilter == "all" ? "btn-primary" : "btn-outline-primary") d-flex align-items-center">
+                        <i class="fas fa-list me-2"></i> Tümü
+                    </a>
+                    <a asp-page="Index" asp-route-filter="aktif"
+                       class="btn @(Model.CurrentFilter == "aktif" ? "btn-success" : "btn-outline-success") d-flex align-items-center">
+                        <i class="fas fa-book-open me-2"></i> Aktif Ödünçler
+                    </a>
+                    <a asp-page="Index" asp-route-filter="teslim"
+                       class="btn @(Model.CurrentFilter == "teslim" ? "btn-info" : "btn-outline-info") d-flex align-items-center">
+                        <i class="fas fa-check me-2"></i> Teslim Edilenler
+                    </a>
+                </div>
+            </div>
+
+            @if (Model.Oduncler != null && Model.Oduncler.Any())
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Üye</th>
+                                        <th>Kitap</th>
+                                        <th>Ödünç Tarihi</th>
+                                        <th>İade Tarihi</th>
+                                        <th>Durum</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var odunc in Model.Oduncler)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <strong>@(odunc.Uye?.AdSoyad ?? "Bilinmeyen Üye")</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-primary">@(odunc.Kitap?.Ad ?? "Bilinmeyen Kitap")</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">@odunc.OduncTarihi.ToString("dd.MM.yyyy")</span>
+                                            </td>
+                                            <td>
+                                                @if (odunc.IadeTarihi.HasValue)
+                                                {
+                                                    <span class="badge bg-success">@odunc.IadeTarihi.Value.ToString("dd.MM.yyyy")</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">-</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (odunc.Aktif)
+                                                {
+                                                    <span class="badge bg-warning text-dark">Aktif</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-success">Teslim Edildi</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <div class="d-flex gap-2" role="group">
+                                                    <a class="btn btn-outline-primary btn-sm d-flex align-items-center"
+                                                       asp-page="Edit" asp-route-id="@odunc.Id" title="Düzenle">
+                                                        <i class="fas fa-edit me-1"></i> Düzenle
+                                                    </a>
+                                                    <a class="btn btn-outline-danger btn-sm d-flex align-items-center"
+                                                       asp-page="Delete" asp-route-id="@odunc.Id" title="Sil">
+                                                        <i class="fas fa-trash me-1"></i> Sil
+                                                    </a>
+                                                    @if (odunc.Aktif)
+                                                    {
+                                                        <form method="post" asp-page-handler="IadeEt" asp-route-id="@odunc.Id" class="d-inline">
+                                                            <button type="submit" class="btn btn-outline-success btn-sm d-flex align-items-center"
+                                                                    title="İade Et"
+                                                                    onclick="return confirm('Bu kitabı iade edildi olarak işaretlemek istediğinizden emin misiniz?')">
+                                                                <i class="fas fa-check me-1"></i> İade Et
+                                                            </button>
+                                                        </form>
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                Toplam @Model.Oduncler.Count ödünç işlemi bulundu.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <div class="mb-3">
+                        <i class="fas fa-book-reader fa-3x text-muted"></i>
+                    </div>
+                    <h4 class="text-muted">Ödünç İşlemi Bulunamadı</h4>
+                    <p class="text-muted">
+                        @if (Model.CurrentFilter == "aktif")
+                        {
+                            <span>Henüz aktif ödünç işlemi bulunmuyor.</span>
+                        }
+                        else if (Model.CurrentFilter == "teslim")
+                        {
+                            <span>Henüz teslim edilmiş ödünç işlemi bulunmuyor.</span>
+                        }
+                        else
+                        {
+                            <span>Henüz hiç ödünç işlemi bulunmuyor.</span>
+                        }
+                    </p>
+                    <a asp-page="Create" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i> İlk Ödünç İşlemini Ekle
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- İhtiyaç halinde JavaScript kodları buraya eklenebilir -->
+}

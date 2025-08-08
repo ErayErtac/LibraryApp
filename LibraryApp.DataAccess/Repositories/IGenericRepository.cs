@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace LibraryApp.DataAccess.Repositories
@@ -12,10 +8,11 @@ namespace LibraryApp.DataAccess.Repositories
     public interface IGenericRepository<T> where T : class
     {
         Task<List<T>> GetAllAsync();
+        Task<List<T>> GetAllWithIncludesAsync(params Expression<Func<T, object>>[] includes);
         Task<T?> GetByIdAsync(int id);
+        Task<T?> GetByIdWithIncludesAsync(int id, params Expression<Func<T, object>>[] includes);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(int id);
     }
 }
-

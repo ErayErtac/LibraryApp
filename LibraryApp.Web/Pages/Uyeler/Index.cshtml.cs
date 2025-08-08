@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 using LibraryApp.Entity.Entities;
 using LibraryApp.Interfaces.Services;
 using System.Collections.Generic;
@@ -17,7 +15,7 @@ namespace LibraryApp.Web.Pages.Uyeler
             _uyeService = uyeService;
         }
 
-        public List<Uye> Uyeler { get; set; } = new List<Uye>();
+        public List<Uye> Uyeler { get; set; } = new();
 
         public async Task OnGetAsync()
         {
